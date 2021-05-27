@@ -12,6 +12,7 @@ services:
       MYSQL_PASSWORD: password
     volumes:
       - var_lib_mysql:/var/lib/mysql
+    privileged: True
 
   slurmdbd:
     image: slurm-docker-cluster:19.05.1
@@ -26,6 +27,7 @@ services:
       - "6819"
     depends_on:
       - mysql
+    privileged: True
 
   slurmctld:
     image: slurm-docker-cluster:19.05.1
@@ -41,6 +43,7 @@ services:
       - "6817"
     depends_on:
       - "slurmdbd"
+    privileged: True
 
   c1:
     image: slurm-docker-cluster:19.05.1
@@ -56,6 +59,7 @@ services:
       - "6818"
     depends_on:
       - "slurmctld"
+    privileged: True
 
   c2:
     image: slurm-docker-cluster:19.05.1
@@ -71,6 +75,7 @@ services:
       - "6818"
     depends_on:
       - "slurmctld"
+    privileged: True
 
 volumes:
   etc_munge:
